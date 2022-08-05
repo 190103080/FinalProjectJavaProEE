@@ -59,6 +59,7 @@
                 <td><%=std.getSurname()%></td>
                 <td><%=std.getBirthdate()%></td>
                 <td><%=std.getCity()%></td>
+                <td><a href="/details?id=<%=std.getId()%>" class="btn btn-dark btn-sm" style="background-color: black; color: white; text-decoration-line: none">DETAILS</a></td>
               </tr>
               <%
                     }

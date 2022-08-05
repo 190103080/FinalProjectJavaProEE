@@ -76,4 +76,33 @@ public class DBUtil {
             e.printStackTrace();
         }
     }
+
+    public static Student getId(Long id) {
+
+        Student student = null;
+
+        try {
+
+            PreparedStatement statement = connection.prepareStatement("select * from students where id = ?");
+            statement.setLong(1,id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()) {
+                student = new Student();
+                student.setId(resultSet.getLong("id"));
+                student.setName(resultSet.getString("name"));
+                student.setSurname(resultSet.getString("surname"));
+                student.setBirthdate(resultSet.getString("birthdate"));
+                student.setCity(resultSet.getString("city"));
+            }
+
+            statement.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return student;
+
+    }
 }
