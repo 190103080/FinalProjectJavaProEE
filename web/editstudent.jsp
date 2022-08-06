@@ -43,8 +43,8 @@
 
                   if (students != null) {
               %>
-            <form action="/" method="post">
-              <input type="hidden" name="item_id" value="<%=students.getId()%>">
+            <form action="/update" method="post">
+              <input type="hidden" name="student_id" value="<%=students.getId()%>">
               <div class="row mt-3">
                 <div class="col-12">
                   <label>
@@ -53,10 +53,7 @@
                 </div>
                 <div class="row mt-3">
                   <div class="col-12">
-<%--                    <input name="item_name" type="text" placeholder="Insert name" required value="<%=items.getName()%>"> <br>--%>
-                    <label>
-                      <%=students.getName()%>
-                    </label>
+                    <input name="student_name" type="text" placeholder="Insert name" required value="<%=students.getName()%>"> <br>
                   </div>
                 </div>
 
@@ -70,10 +67,7 @@
 
                 <div class="row mt-3">
                   <div class="col-12">
-<%--                    <input name="item_price" type="number" placeholder="Insert price" value="<%=items.getPrice()%>"> <br>--%>
-                    <label>
-                      <%=students.getSurname()%>
-                    </label>
+                    <input name="student_surname" type="text" placeholder="Insert price" required value="<%=students.getSurname()%>"> <br>
                   </div>
                 </div>
 
@@ -87,10 +81,7 @@
 
                 <div class="row mt-3">
                   <div class="col-12">
-<%--                    <input name="item_amount" type="number" placeholder="Insert amount" required value="<%=items.getAmount()%>"> <br>--%>
-                    <label>
-                      <%=students.getBirthdate()%>
-                    </label>
+                    <input name="student_birthdate" type="date" placeholder="Insert amount" required value="<%=students.getBirthdate()%>"> <br>
                   </div>
                 </div>
 
@@ -104,20 +95,52 @@
 
                   <div class="row mt-3">
                       <div class="col-12">
-                          <%--                    <input name="item_amount" type="number" placeholder="Insert amount" required value="<%=items.getAmount()%>"> <br>--%>
-                          <label>
-                              <%=students.getCity()%>
-                          </label>
+                                  <select name="student_city" required>
+                                      <option selected><%=students.getCity()%></option>
+                                      <option>Almaty</option>
+                                      <option>Astana</option>
+                                      <option>Taraz</option>
+                                      <option>Shymkent</option>
+                                      <option>Satpaev</option>
+                                      <option>Zhezkazgan</option>
+                                      <option>Karaganda</option>
+                                      <option>Atyrau</option>
+                                      <option>Barcelona</option>
+                                      <option>Paris</option>
+                                  </select> <br>
                       </div>
                   </div>
 
                   <div class="row mt-3">
                       <div class="col-12">
-                          <button class="btn" style="background-color: blue; color: white; text-decoration-line: none"><a href="/editstudent?id=<%=students.getId()%>">EDIT STUDENT</a></button>
+                          <button class="btn btn-success">SAVE STUDENT</button>
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal" >DELETE ITEM</button>
                       </div>
                   </div>
               </div>
             </form>
+
+              <div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <form action="/delete" method="post">
+                              <input type="hidden" name="student_id" value="<%=students.getId()%>">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                  Are you sure?
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                                  <button class="btn btn-danger">YES</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+
               <%
                   }
               %>

@@ -26,7 +26,7 @@ public class DBUtil {
 
     }
 
-    public static ArrayList<Student> getAllItems() {
+    public static ArrayList<Student> getAllStudents() {
 
         ArrayList<Student> students = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class DBUtil {
 
     }
 
-    public static void addItem(Student student) {
+    public static void addStudent(Student student) {
         try {
 
             PreparedStatement statement = connection.prepareStatement(
@@ -77,7 +77,7 @@ public class DBUtil {
         }
     }
 
-    public static Student getId(Long id) {
+    public static Student getStudent(Long id) {
 
         Student student = null;
 
@@ -103,6 +103,44 @@ public class DBUtil {
         }
 
         return student;
+
+    }
+
+    public static void updateStudent(Student student) {
+        try {
+
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "update students set name = ?, surname = ?, birthdate = ?, city = ? where id = ?");
+
+            statement.setString(1, student.getName());
+            statement.setString(2, student.getSurname());
+            statement.setString(3, student.getBirthdate());
+            statement.setString(4, student.getCity());
+            statement.setLong(5, student.getId());
+
+            statement.executeUpdate();
+            statement.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void deleteStudent(Long id) {
+
+        try {
+
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "delete from students where id = ?");
+
+            statement.setLong(1, id);
+            statement.executeUpdate();
+            statement.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

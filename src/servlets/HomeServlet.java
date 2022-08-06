@@ -17,7 +17,7 @@ public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        ArrayList<Student> students = DBUtil.getAllItems();
+        ArrayList<Student> students = DBUtil.getAllStudents();
         request.setAttribute("oqushylar", students);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
 

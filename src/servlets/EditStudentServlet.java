@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(value = "/details")
-public class DetailsServlet extends HttpServlet {
+@WebServlet(value = "/editstudent")
+public class EditStudentServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -19,8 +19,7 @@ public class DetailsServlet extends HttpServlet {
         Student student = DBUtil.getStudent(id);
 
         request.setAttribute("oqushylar", student);
-        request.getRequestDispatcher("/details.jsp").forward(request, response);
+        request.getRequestDispatcher("/editstudent.jsp").forward(request, response);
 
     }
-
 }
