@@ -20,7 +20,7 @@ public class UpdateStudentServlet extends HttpServlet {
         String name = request.getParameter("student_name");
         String surname = request.getParameter("student_surname");
         String birthdate = request.getParameter("student_birthdate");
-        String city = request.getParameter("student_city");
+//        String city = request.getParameter("student_city");
         Long id = Long.parseLong(request.getParameter("student_id"));
 
         Student student = DBUtil.getStudent(id);
@@ -29,7 +29,7 @@ public class UpdateStudentServlet extends HttpServlet {
                     student.setName(name);
                     student.setSurname(surname);
                     student.setBirthdate(birthdate);
-                    student.setCity(city);
+                    //student.setCity(city);
 
                     DBUtil.updateStudent(student);
                     redirect = "/editstudent?id="+id+"&success";

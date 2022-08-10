@@ -1,5 +1,4 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="db.Student" %>
 <%@ page import="db.City" %><%--
   Created by IntelliJ IDEA.
   User: 1
@@ -29,7 +28,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="/index">ALL STUDENTS</a>
+                <a class="nav-link" aria-current="page" href="/cities">CITIES</a>
               </div>
             </div>
           </div>
@@ -39,12 +38,12 @@
         <div class="row mt-3">
           <div class="col-6 mx-auto">
               <%
-                  Student students = (Student)request.getAttribute("oqushylar");
+                  City city = (City)request.getAttribute("qalalar");
 
-                  if (students != null) {
+                  if (city != null) {
               %>
-            <form action="/update" method="post">
-              <input type="hidden" name="student_id" value="<%=students.getId()%>">
+            <form action="/updatecity" method="post">
+              <input type="hidden" name="city_id" value="<%=city.getId()%>">
               <div class="row mt-3">
                 <div class="col-12">
                   <label>
@@ -53,68 +52,28 @@
                 </div>
                 <div class="row mt-3">
                   <div class="col-12">
-                    <input name="student_name" type="text" placeholder="Insert name" required value="<%=students.getName()%>"> <br>
+                    <input name="city_name" type="text" placeholder="Insert name" required value="<%=city.getName()%>"> <br>
                   </div>
                 </div>
 
                 <div class="rwo mt-3">
                   <div class="col-12">
                     <label>
-                      <strong>SURNAME:</strong>
+                      <strong>CODE:</strong>
                     </label>
                   </div>
                 </div>
 
                 <div class="row mt-3">
                   <div class="col-12">
-                    <input name="student_surname" type="text" placeholder="Insert price" required value="<%=students.getSurname()%>"> <br>
+                    <input name="city_code" type="text" placeholder="Insert price" required value="<%=city.getCode()%>"> <br>
                   </div>
                 </div>
 
-                <div class="row mt-3">
-                  <div class="col-12">
-                    <label>
-                      <strong>BIRTHDATE:</strong>
-                    </label>
-                  </div>
-                </div>
-
-                <div class="row mt-3">
-                  <div class="col-12">
-                    <input name="student_birthdate" type="date" placeholder="Insert amount" required value="<%=students.getBirthdate()%>"> <br>
-                  </div>
-                </div>
 
                   <div class="row mt-3">
                       <div class="col-12">
-                          <label>
-                              <strong>CITY:</strong>
-                          </label>
-                      </div>
-                  </div>
-
-                  <div class="row mt-3">
-                      <div class="col-12">
-                                  <select name="city" required>
-                                      <%
-                                          ArrayList<City> cities = (ArrayList<City>) request.getAttribute("qalalar");
-                                          if(cities != null) {
-                                              for (City cts : cities) {
-                                      %>
-                                          <option value="<%=cts.getId()%>">
-                                              <%=cts.getName() + " - " + cts.getCode()%>
-                                          </option>
-                                      <%
-                                              }
-                                          }
-                                      %>
-                                  </select> <br>
-                      </div>
-                  </div>
-
-                  <div class="row mt-3">
-                      <div class="col-12">
-                          <button class="btn btn-success">SAVE STUDENT</button>
+                          <button class="btn btn-success">SAVE CITY</button>
                           <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal" >DELETE ITEM</button>
                       </div>
                   </div>
@@ -124,8 +83,8 @@
               <div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
-                          <form action="/delete" method="post">
-                              <input type="hidden" name="student_id" value="<%=students.getId()%>">
+                          <form action="/deletecity" method="post">
+                              <input type="hidden" name="city_id" value="<%=city.getId()%>">
                               <div class="modal-header">
                                   <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

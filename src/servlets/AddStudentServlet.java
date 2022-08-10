@@ -1,5 +1,6 @@
 package servlets;
 
+import db.City;
 import db.DBUtil;
 import db.Student;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(value = "/add")
 public class AddStudentServlet extends HttpServlet {
@@ -16,16 +18,21 @@ public class AddStudentServlet extends HttpServlet {
         String name = request.getParameter("student_name");
         String surname = request.getParameter("student_surname");
         String birthdate = request.getParameter("student_birthdate");
-        String city = request.getParameter("student_city");
+//        String city = request.getParameter("student_city");
 
         Student student = new Student();
         student.setName(name);
         student.setSurname(surname);
         student.setBirthdate(birthdate);
-        student.setCity(city);
+//      student.setCity(city);
 
-        DBUtil.addItem(student);
+        DBUtil.addStudent(student);
 
         response.sendRedirect("/index?success");
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ArrayList<City> cities = DBUtil.getAllCities();
+        request.setAttribute("qalalar", cities);
     }
 }

@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="db.Student" %><%--
+<%@ page import="db.Student" %>
+<%@ page import="db.City" %><%--
   Created by IntelliJ IDEA.
   User: 1
   Date: 26.07.2022
@@ -29,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navbar-nav">
                     <a class="nav-link" aria-current="page" href="/index">ALL STUDENTS</a>
-                    <a class="nav-link" href="/addstudent.jsp">ADD STUDENT</a>
+                    <a class="nav-link" href="/cities">CITIES</a>
                   </div>
                 </div>
               </div>
@@ -37,6 +38,109 @@
           </div>
 
           <div class="container">
+
+            <form action="/add" method="post">
+
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                + ADD STUDENT
+              </button>
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add New Student</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container">
+                        <div class="row mt-3">
+                          <div class="col-6 mx-auto">
+                              <div class="row mt-3">
+                                <div class="col-12">
+                                  <label>
+                                    NAME:
+                                  </label>
+                                </div>
+
+                                <div class="row mt-3">
+                                  <div class="col-12">
+                                    <input name="student_name" type="text" placeholder="Insert name"> <br>
+                                  </div>
+                                </div>
+
+                                <div class="rwo mt-3">
+                                  <div class="col-12">
+                                    <label>
+                                      SURNAME:
+                                    </label>
+                                  </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                  <div class="col-12">
+                                    <input name="student_surname" type="text" placeholder="Insert surname"> <br>
+                                  </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                  <div class="col-12">
+                                    <label>
+                                      BIRTHDATE:
+                                    </label>
+                                  </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                  <div class="col-12">
+                                    <input name="student_birthdate" type="date" placeholder="Insert amount"> <br>
+                                  </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                  <div class="col-12">
+                                    <label>
+                                      CITY:
+                                    </label>
+                                  </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                  <div class="col-12">
+                                    <select class="form-select" name="city">
+                                      <%
+                                        ArrayList<City> cities = (ArrayList<City>) request.getAttribute("qalalar");
+                                        if(cities != null) {
+                                          for (City cts : cities) {
+                                      %>
+                                          <option value="<%=cts.getId()%>">
+                                              <%=cts.getName() + " - " + cts.getCode()%>
+                                          </option>
+                                      <%
+                                          }
+                                        }
+                                      %>
+                                    </select> <br>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+                      <button class="btn btn-success">ADD STUDENT</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </form>
+
             <table class="table">
               <thead>
               <tr>
@@ -58,11 +162,11 @@
                 <td><%=std.getName()%></td>
                 <td><%=std.getSurname()%></td>
                 <td><%=std.getBirthdate()%></td>
-                <td><%=std.getCity()%></td>
+                <td><%=std.getCity().getName() + " / " + std.getCity().getCode()%></td>
                 <td><a href="/details?id=<%=std.getId()%>" class="btn btn-dark btn-sm" style="background-color: black; color: white; text-decoration-line: none">DETAILS</a></td>
               </tr>
               <%
-                    }
+                  }
                 }
               %>
               </tbody>

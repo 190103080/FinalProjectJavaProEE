@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="db.City" %><%--
   Created by IntelliJ IDEA.
   User: 1
   Date: 26.07.2022
@@ -28,93 +29,66 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
                 <a class="nav-link" aria-current="page" href="/index">ALL STUDENTS</a>
-                <a class="nav-link" href="/addstudent.jsp">ADD STUDENTS</a>
+                <a class="nav-link" href="/cities">CITIES</a>
               </div>
             </div>
           </div>
         </nav>
       </div>
-
       <div class="container">
         <div class="row mt-3">
           <div class="col-6 mx-auto">
-            <form action="/add" method="post">
+              <%
+                  City city = (City)request.getAttribute("qalalar");
+
+                  if (city != null) {
+              %>
+            <form action="/" method="post">
+              <input type="hidden" name="city_id" value="<%=city.getId()%>">
               <div class="row mt-3">
                 <div class="col-12">
                   <label>
-                    NAME:
+                    <strong>NAME:</strong>
                   </label>
                 </div>
-
                 <div class="row mt-3">
                   <div class="col-12">
-                    <input name="student_name" type="text" placeholder="Insert name"> <br>
+<%--                    <input name="item_name" type="text" placeholder="Insert name" required value="<%=items.getName()%>"> <br>--%>
+                    <label>
+                      <%=city.getName()%>
+                    </label>
                   </div>
                 </div>
 
                 <div class="rwo mt-3">
                   <div class="col-12">
                     <label>
-                      SURNAME:
+                      <strong>CODE:</strong>
                     </label>
                   </div>
                 </div>
 
                 <div class="row mt-3">
                   <div class="col-12">
-                    <input name="student_surname" type="text" placeholder="Insert price"> <br>
-                  </div>
-                </div>
-
-                <div class="row mt-3">
-                  <div class="col-12">
+<%--                    <input name="item_price" type="number" placeholder="Insert price" value="<%=items.getPrice()%>"> <br>--%>
                     <label>
-                      BIRTHDATE:
+                      <%=city.getCode()%>
                     </label>
                   </div>
                 </div>
 
-                <div class="row mt-3">
-                  <div class="col-12">
-                    <input name="student_birthdate" type="date" placeholder="Insert amount"> <br>
+                  <div class="row mt-3">
+                      <div class="col-12">
+                          <button class="btn" style="background-color: blue; color: white; text-decoration-line: none"><a href="/editcity?id=<%=city.getId()%>">EDIT CITY</a></button>
+                      </div>
                   </div>
-                </div>
-
-                <div class="row mt-3">
-                  <div class="col-12">
-                    <label>
-                      CITY:
-                    </label>
-                  </div>
-                </div>
-
-                <div class="row mt-3">
-                  <div class="col-12">
-                    <select name="student_city">
-                      <option>Almaty</option>
-                      <option>Astana</option>
-                      <option>Taraz</option>
-                      <option>Shymkent</option>
-                      <option>Satpaev</option>
-                      <option>Zhezkazgan</option>
-                      <option>Karaganda</option>
-                      <option>Atyrau</option>
-                      <option>Barcelona</option>
-                      <option>Paris</option>
-                    </select> <br>
-                  </div>
-                </div>
-
-                <div class="row mt-3">
-                  <div class="col-12">
-                    <button class="btn btn-success" style="background-color: #004000; color: white">ADD STUDENT</button>
-                  </div>
-                </div>
               </div>
             </form>
+              <%
+                  }
+              %>
           </div>
         </div>
       </div>
-
 </body>
 </html>

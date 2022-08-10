@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="db.Student" %><%--
+<%@ page import="db.Student" %>
+<%@ page import="db.City" %><%--
   Created by IntelliJ IDEA.
   User: 1
   Date: 26.07.2022
@@ -29,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
                 <a class="nav-link" aria-current="page" href="/index">ALL STUDENTS</a>
-                <a class="nav-link" href="/addstudent.jsp">ADD STUDENT</a>
+                <a class="nav-link" href="/cities">CITIES</a>
               </div>
             </div>
           </div>
@@ -106,7 +107,7 @@
                       <div class="col-12">
                           <%--                    <input name="item_amount" type="number" placeholder="Insert amount" required value="<%=items.getAmount()%>"> <br>--%>
                           <label>
-                              <%=students.getCity()%>
+                              <%=students.getCity().getName() + " / " + students.getCity().getCode()%>
                           </label>
                       </div>
                   </div>
