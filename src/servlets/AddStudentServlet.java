@@ -3,6 +3,7 @@ package servlets;
 import db.City;
 import db.DBUtil;
 import db.Student;
+import db.User;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,13 @@ public class AddStudentServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ArrayList<City> cities = DBUtil.getAllCities();
-        request.setAttribute("qalalar", cities);
+        User currentUser = (User) request.getSession().getAttribute("authUser");
+
+        if (currentUser!=null) {
+            ArrayList<City> cities = DBUtil.getAllCities();
+            request.setAttribute("qalalar", cities);
+        } else {
+            response.sendRedirect("/login");
+        }
     }
 }
